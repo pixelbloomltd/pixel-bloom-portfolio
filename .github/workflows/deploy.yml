@@ -15,19 +15,23 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'pnpm'
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+       - name: Install dependencies
+        run: pnpm install
+      
+      - name: Build
+        run: pnpm build
       
       - name: Enable pnpm
         run: corepack enable
       
       - name: Install pnpm
         run: npm install -g pnpm
-      
-      - name: Install dependencies
-        run: pnpm install
-      
-      - name: Build
-        run: pnpm build
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
